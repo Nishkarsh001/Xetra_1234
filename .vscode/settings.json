@@ -1,0 +1,5 @@
+{
+    "python.analysis.typeCheckingMode": "basic",
+    "pylint.enabled": true,
+    "python.defaultInterpreterPath": "python"
+}
