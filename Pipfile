@@ -5,17 +5,18 @@ name = "pypi"
 
 [packages]
 pandas = "*"
-awscli = "*"
-jupyter = "*"
 boto3 = "*"
 pyarrow = "*"
 pyyaml = "*"
+
+[dev-packages]
+awscli = "*"
+jupyter = "*"
 pylint = "*"
 moto = "*"
 coverage = "*"
-
-[dev-packages]
+memory-profiler = "*"
+matplotlib = "*"
 
 [requires]
 python_version = "3.11"
-python_full_version = "3.11.3"
