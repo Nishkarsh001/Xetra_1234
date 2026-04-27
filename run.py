@@ -6,7 +6,7 @@ import logging.config
 import yaml
 from Xetra.common.S3 import S3BucketConnector
 from Xetra.transformers.xetra_transformers import XetraETL, XetraSourceConfig, XetraTargetConfig 
-
+# from memory_profiler import profile
 
 def main():
     """

@@ -8,6 +8,7 @@ import logging
 from Xetra.common.custom_exceptions import WrongFormatException
 import boto3
 import pandas as pd
+from botocore.config import Config
 
 class S3BucketConnector():
     """
@@ -27,13 +28,13 @@ class S3BucketConnector():
         self.session = boto3.Session(aws_access_key_id=os.environ[access_key],
                                       aws_secret_access_key=os.environ[secret_key]
         )
-
+        config = Config(retries={'max_attempts': 5, 'mode': 'adaptive'})  # ← add this
         if endpoint_url:
             self._s3 = self.session.resource(service_name='s3', endpoint_url=endpoint_url)
         else:
             self._s3 = self.session.resource(service_name='s3')
         self._bucket = self._s3.Bucket(bucket) # type: ignore
-
+    # @profile
     def list_files_in_prefix(self,prefix: str):
         """
         List all files in a given prefix within the S3 bucket.
@@ -43,7 +44,7 @@ class S3BucketConnector():
         """
         files = [obj.key for obj in self._bucket.objects.filter(Prefix=prefix)]
         return files
-
+    # @profile
     def read_csv_to_df(self, key: str, encoding: str = 'utf-8', sep: str = ','):
         """
         reading a csv file from the S3 bucket and returning a dataframe
@@ -66,7 +67,7 @@ class S3BucketConnector():
         data_frame = pd.read_csv(data, sep=sep)
 
         return data_frame
-
+    # @profile
     def write_df_to_s3(self, data_frame: pd.DataFrame, key: str, file_format: str):
         """
         writing a Pandas DataFrame to S3
@@ -98,7 +99,7 @@ class S3BucketConnector():
             file_format
         )
         raise WrongFormatException()
-
+    
     def _put_object(self, out_buffer: StringIO | BytesIO, key: str):
         """
         Helper function for self.write_df_to_s3()

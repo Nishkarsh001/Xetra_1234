@@ -8,6 +8,7 @@ pandas = "*"
 boto3 = "*"
 pyarrow = "*"
 pyyaml = "*"
+memory-profiler = "*"
 
 [dev-packages]
 awscli = "*"

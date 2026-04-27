@@ -6,12 +6,12 @@ s3:
   src_bucket: xetra-1234
   trg_access_key: AWS_ACCESS_KEY_ID
   trg_secret_key: AWS_SECRET_ACCESS_KEY
-  trg_endpoint_url: https://s3.amazonaws.com  
+  trg_endpoint_url: ''
   trg_bucket: xetraproject-1234
   
 # configuration specific to the source
 source:
-  src_first_extract_date: '2021-06-24'
+  src_first_extract_date: '2022-12-31'
   src_columns: ['ISIN', 'Mnemonic', 'Date', 'Time', 'StartPrice', 'EndPrice', 'MinPrice', 'MaxPrice', 'TradedVolume']
   src_col_date: 'Date'
   src_col_isin: 'ISIN'
